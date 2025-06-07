@@ -31,7 +31,7 @@ export const generateIframeCode = (config: IframeConfig): string => {
   if (attributes.allowClipboard) allowValues.push('clipboard-write');
   if (attributes.allowPaymentRequest) allowValues.push('payment');
   
-  let iframeAttributes = [
+  const iframeAttributes = [
     `src="${url}"`,
     `width="${width}"`,
     `height="${height}"`
