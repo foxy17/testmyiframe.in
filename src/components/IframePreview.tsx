@@ -15,7 +15,7 @@ export const IframePreview: React.FC<IframePreviewProps> = ({ config, isValid, i
   const [hasError, setHasError] = useState(false);
   const [errorDetails, setErrorDetails] = useState<string>('');
   const [isCopied, setIsCopied] = useState(false);
-  const [loadTimeout, setLoadTimeout] = useState<NodeJS.Timeout | null>(null);
+  const [loadTimeout, setLoadTimeout] = useState<ReturnType<typeof setTimeout> | null>(null);
 
   const iframeCode = generateIframeCode(config);
   const displayWidth = formatDimension(config.dimensions.width, config.dimensions.widthUnit);
@@ -27,12 +27,12 @@ export const IframePreview: React.FC<IframePreviewProps> = ({ config, isValid, i
       setHasError(false);
       setErrorDetails('');
 
-      // Set a timeout for loading
+      // Set a longer timeout and make it less aggressive
       const timeout = setTimeout(() => {
         setIsLoading(false);
-        setHasError(true);
-        setErrorDetails('Loading timeout - the site may be blocking iframe embedding or taking too long to respond');
-      }, 15000); // 15 second timeout
+        // Don't show error immediately, just stop loading indicator
+        console.log('Iframe load timeout reached, but iframe may still be loading normally');
+      }, 30000); // 30 second timeout, and don't show error
 
       setLoadTimeout(timeout);
     }
@@ -47,6 +47,14 @@ export const IframePreview: React.FC<IframePreviewProps> = ({ config, isValid, i
     setHasError(false);
     setErrorDetails('');
     console.log('Iframe loaded successfully:', config.url);
+  };
+
+  const handleDismissLoading = () => {
+    if (loadTimeout) {
+      clearTimeout(loadTimeout);
+      setLoadTimeout(null);
+    }
+    setIsLoading(false);
   };
 
   const handleIframeError = () => {
@@ -144,8 +152,6 @@ export const IframePreview: React.FC<IframePreviewProps> = ({ config, isValid, i
                   <button
                     key={url}
                     onClick={() => {
-                      const event = { target: { value: url.replace(/^https?:\/\//, '') } };
-                      // Simulate input change
                       const inputElement = document.querySelector('input[type="url"]') as HTMLInputElement;
                       if (inputElement) {
                         inputElement.value = url.replace(/^https?:\/\//, '');
@@ -204,9 +210,17 @@ export const IframePreview: React.FC<IframePreviewProps> = ({ config, isValid, i
         <div className="relative bg-gray-50 rounded-lg overflow-hidden">
           {isLoading && (
             <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-90 z-10">
-              <div className="flex items-center space-x-2 text-gray-600">
-                <Loader2 className="w-4 h-4 animate-spin" />
-                <span className="text-sm">Loading content...</span>
+              <div className="text-center">
+                <div className="flex items-center justify-center space-x-2 text-gray-600 mb-3">
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                  <span className="text-sm">Loading content...</span>
+                </div>
+                <button
+                  onClick={handleDismissLoading}
+                  className="text-xs text-gray-500 hover:text-gray-700 underline"
+                >
+                  Dismiss (content may still be loading)
+                </button>
               </div>
             </div>
           )}
@@ -289,6 +303,33 @@ export const IframePreview: React.FC<IframePreviewProps> = ({ config, isValid, i
                 onError={handleIframeError}
                 className="w-full h-full"
                 referrerPolicy="no-referrer-when-downgrade"
+                ref={(iframe) => {
+                  if (iframe && isRenderMode) {
+                    // Additional load detection - some iframes don't trigger onLoad properly
+                    const checkIfLoaded = () => {
+                      try {
+                        // If we can access the iframe's contentWindow, it's likely loaded
+                        // This might throw if cross-origin, but that's expected
+                        if (iframe.contentWindow) {
+                          handleIframeLoad();
+                        }
+                      } catch (e) {
+                        // Cross-origin iframe, but if we get here without error, it's likely loaded
+                        setTimeout(() => {
+                          if (isLoading) {
+                            console.log('Iframe appears to be loaded (cross-origin)');
+                            handleIframeLoad();
+                          }
+                        }, 3000); // Give it 3 seconds for cross-origin content
+                      }
+                    };
+                    
+                    // Check multiple times as some sites load content dynamically
+                    setTimeout(checkIfLoaded, 1000);
+                    setTimeout(checkIfLoaded, 3000);
+                    setTimeout(checkIfLoaded, 5000);
+                  }
+                }}
               />
             </div>
           </div>
