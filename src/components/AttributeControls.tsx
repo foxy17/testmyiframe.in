@@ -155,6 +155,10 @@ export const AttributeControls: React.FC<AttributeControlsProps> = ({
               <button
                 onClick={(e) => {
                   e.stopPropagation();
+                  // Expand the section if it's collapsed
+                  if (!isSectionExpanded('Custom Attributes')) {
+                    toggleSection('Custom Attributes');
+                  }
                   addCustomAttribute();
                 }}
                 className="flex items-center space-x-1 px-3 py-1.5 text-xs bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
