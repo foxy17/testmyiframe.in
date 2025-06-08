@@ -1,4 +1,3 @@
-import React from 'react';
 import { UrlInputSection, DimensionsSection, AttributesSection } from '../forms';
 import { TroubleshootingTips } from '../TroubleshootingTips';
 
