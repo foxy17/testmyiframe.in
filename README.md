@@ -1,5 +1,7 @@
 # 🖼️ Advanced Iframe Testing Application
 
+![Iframe Tester - Advanced Embedded Webpage Testing Tool](./public/og.png)
+
 > A comprehensive, interactive tool for testing and configuring iframe elements with real-time preview, security controls, and code generation.
 
 [![React](https://img.shields.io/badge/React-18.3.1-blue.svg)](https://reactjs.org/)
@@ -417,6 +419,13 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Styled with [Tailwind CSS](https://tailwindcss.com/)
 - Icons by [Lucide React](https://lucide.dev/)
 - Powered by [Vite](https://vitejs.dev/)
+
+---
+
+## 👨‍💻 Made with ❤️ in India
+
+This project was created with love by **Arnav**  
+🌐 Website: [carnav.in](https://carnav.in)
 
 ---
 
