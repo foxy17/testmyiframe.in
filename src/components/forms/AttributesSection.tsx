@@ -5,7 +5,7 @@ import { AttributePresets } from '../AttributePresets';
 import { AttributeControls } from '../AttributeControls';
 
 export function AttributesSection() {
-  const { config, selectedAttributePreset } = useIframeContext();
+  const { config, selectedAttributePreset, expandAllSections } = useIframeContext();
   const { 
     handleAttributesChange, 
     handleAttributePresetSelect, 
@@ -25,6 +25,7 @@ export function AttributesSection() {
           customAttributes={config.customAttributes}
           onAttributesChange={handleAttributesChange}
           onCustomAttributesChange={handleCustomAttributesChange}
+          expandAllSections={expandAllSections}
         />
       </div>
     </div>

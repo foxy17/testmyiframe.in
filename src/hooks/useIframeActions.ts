@@ -3,37 +3,41 @@ import { IframeDimensions, IframeAttributes, CustomAttribute, PresetDimension } 
 import { sanitizeUrl } from '../utils/validation';
 import { buildRenderUrl } from '../utils/urlParams';
 import { useIframeContext } from '../contexts/IframeContext';
+import { ACTIONS } from '../types/actions';
 
 export function useIframeActions() {
   const { config, errors, dispatch } = useIframeContext();
 
   const handleUrlChange = useCallback((url: string) => {
     const sanitizedUrl = url ? sanitizeUrl(url) : '';
-    dispatch({ type: 'SET_URL', payload: sanitizedUrl });
+    dispatch({ type: ACTIONS.SET_URL, payload: sanitizedUrl });
   }, [dispatch]);
 
   const handleDimensionsChange = useCallback((dimensions: IframeDimensions) => {
-    dispatch({ type: 'SET_DIMENSIONS', payload: dimensions });
+    dispatch({ type: ACTIONS.SET_DIMENSIONS, payload: dimensions });
   }, [dispatch]);
 
   const handleAttributesChange = useCallback((attributes: IframeAttributes) => {
-    dispatch({ type: 'SET_ATTRIBUTES', payload: attributes });
+    dispatch({ type: ACTIONS.SET_ATTRIBUTES, payload: attributes });
+    dispatch({ type: ACTIONS.SET_SELECTED_ATTRIBUTE_PRESET, payload: undefined });
   }, [dispatch]);
 
-  const handleAttributePresetSelect = useCallback((attributes: IframeAttributes) => {
-    dispatch({ type: 'SET_ATTRIBUTES', payload: attributes });
+  const handleAttributePresetSelect = useCallback((attributes: IframeAttributes, presetName: string) => {
+    dispatch({ type: ACTIONS.SET_ATTRIBUTES, payload: attributes });
+    dispatch({ type: ACTIONS.SET_SELECTED_ATTRIBUTE_PRESET, payload: presetName });
+    dispatch({ type: ACTIONS.SET_EXPAND_ALL_SECTIONS, payload: true });
   }, [dispatch]);
 
   const handleCustomAttributesChange = useCallback((customAttributes: CustomAttribute[]) => {
-    dispatch({ type: 'SET_CUSTOM_ATTRIBUTES', payload: customAttributes });
+    dispatch({ type: ACTIONS.SET_CUSTOM_ATTRIBUTES, payload: customAttributes });
   }, [dispatch]);
 
   const handlePresetSelect = useCallback((preset: PresetDimension) => {
-    dispatch({ type: 'SET_SELECTED_PRESET', payload: preset.name });
+    dispatch({ type: ACTIONS.SET_SELECTED_PRESET, payload: preset.name });
     
     if (preset.name === 'Full Width') {
       dispatch({
-        type: 'SET_DIMENSIONS',
+        type: ACTIONS.SET_DIMENSIONS,
         payload: {
           width: 100,
           height: preset.height,
@@ -43,7 +47,7 @@ export function useIframeActions() {
       });
     } else {
       dispatch({
-        type: 'SET_DIMENSIONS',
+        type: ACTIONS.SET_DIMENSIONS,
         payload: {
           width: preset.width,
           height: preset.height,
@@ -67,15 +71,19 @@ export function useIframeActions() {
   }, []);
 
   const handleEditSettings = useCallback(() => {
-    dispatch({ type: 'SET_SHOW_EDIT_SETTINGS', payload: true });
+    dispatch({ type: ACTIONS.SET_SHOW_EDIT_SETTINGS, payload: true });
   }, [dispatch]);
 
   const handleQuickTest = useCallback(() => {
     dispatch({
-      type: 'SET_CONFIG',
+      type: ACTIONS.SET_CONFIG,
       payload: { url: 'https://httpbin.org/html' }
     });
-    dispatch({ type: 'SET_RENDER_MODE', payload: false });
+    dispatch({ type: ACTIONS.SET_RENDER_MODE, payload: false });
+  }, [dispatch]);
+
+  const handleResetExpansion = useCallback(() => {
+    dispatch({ type: ACTIONS.SET_EXPAND_ALL_SECTIONS, payload: false });
   }, [dispatch]);
 
   return {
@@ -88,6 +96,7 @@ export function useIframeActions() {
     handleRenderIframe,
     handleClearRender,
     handleEditSettings,
-    handleQuickTest
+    handleQuickTest,
+    handleResetExpansion
   };
 } 

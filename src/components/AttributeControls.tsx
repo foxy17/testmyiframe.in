@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Plus, X, ChevronDown, ChevronUp } from 'lucide-react';
+import { Plus, X, ChevronDown, ChevronUp, Minimize2 } from 'lucide-react';
 import { IframeAttributes, CustomAttribute } from '../types/iframe';
 import { attributeGroups } from '../utils/constants';
 
@@ -20,19 +20,29 @@ export const AttributeControls: React.FC<AttributeControlsProps> = ({
 }) => {
   // State to track which sections are expanded
   const [expandedSections, setExpandedSections] = useState<Set<string>>(new Set());
+  // State to track if user has manually overridden the expandAllSections behavior
+  const [manualOverride, setManualOverride] = useState(false);
 
   // Effect to expand all sections when expandAllSections prop is true
   useEffect(() => {
-    if (expandAllSections) {
+    if (expandAllSections && !manualOverride) {
       const allSections = new Set([
         ...attributeGroups.map(group => group.title),
         'Custom Attributes'
       ]);
       setExpandedSections(allSections);
     }
+  }, [expandAllSections, manualOverride]);
+
+  // Effect to reset manual override when expandAllSections becomes true (new preset selected)
+  useEffect(() => {
+    if (expandAllSections) {
+      setManualOverride(false);
+    }
   }, [expandAllSections]);
 
   const toggleSection = (sectionTitle: string) => {
+    setManualOverride(true);
     const newExpanded = new Set(expandedSections);
     if (newExpanded.has(sectionTitle)) {
       newExpanded.delete(sectionTitle);
@@ -42,7 +52,12 @@ export const AttributeControls: React.FC<AttributeControlsProps> = ({
     setExpandedSections(newExpanded);
   };
 
-  const isSectionExpanded = (sectionTitle: string) => expandedSections.has(sectionTitle) || expandAllSections;
+  const collapseAllSections = () => {
+    setManualOverride(true);
+    setExpandedSections(new Set());
+  };
+
+  const isSectionExpanded = (sectionTitle: string) => expandedSections.has(sectionTitle);
 
   const handleAttributeChange = (key: keyof IframeAttributes, value: boolean) => {
     onAttributesChange({
@@ -72,10 +87,20 @@ export const AttributeControls: React.FC<AttributeControlsProps> = ({
     onCustomAttributesChange(customAttributes.filter(attr => attr.id !== id));
   };
 
-
-
   return (
     <div className="space-y-6">
+      {expandedSections.size > 0 && (
+        <div className="flex justify-end">
+          <button
+            onClick={collapseAllSections}
+            className="flex items-center space-x-1 px-3 py-1.5 text-xs bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
+          >
+            <Minimize2 className="w-3 h-3" />
+            <span>Collapse All</span>
+          </button>
+        </div>
+      )}
+      
       {attributeGroups.map((group) => {
         const IconComponent = group.icon;
         const isExpanded = isSectionExpanded(group.title);

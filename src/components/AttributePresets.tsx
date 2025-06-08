@@ -3,7 +3,7 @@ import { Shield, ShieldCheck, ShieldX, Zap } from 'lucide-react';
 import { IframeAttributes } from '../types/iframe';
 
 interface AttributePresetsProps {
-  onSelectPreset: (attributes: IframeAttributes) => void;
+  onSelectPreset: (attributes: IframeAttributes, presetName: string) => void;
   selectedPreset?: string;
 }
 
@@ -118,7 +118,7 @@ export const AttributePresets: React.FC<AttributePresetsProps> = ({
           return (
             <button
               key={preset.name}
-              onClick={() => onSelectPreset(preset.attributes)}
+              onClick={() => onSelectPreset(preset.attributes, preset.name)}
               className={`
                 flex items-start p-3 rounded-lg border-2 transition-all duration-200 text-left
                 ${isSelected 
