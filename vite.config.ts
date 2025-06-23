@@ -19,6 +19,9 @@ export default defineConfig({
         manualChunks: undefined,
       },
     },
+    // Ensure build exits cleanly in CI
+    emptyOutDir: true,
+    minify: 'esbuild',
   },
   optimizeDeps: {
     exclude: ['lucide-react'],
