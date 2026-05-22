@@ -141,10 +141,11 @@
     }
     </script>
     
-    <!-- Preconnect for Performance -->
+    <!-- Preconnect and Asynchronous Font Loading for Performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
     
     <!-- Additional Meta for Crawlers -->
     <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
@@ -163,8 +164,8 @@
     <!-- Additional Security & Performance -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="format-detection" content="telephone=no" />
-    <script type="module" crossorigin src="/assets/main-BdO2wFjL.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/main-BbH3rEpn.css">
+    <script type="module" crossorigin src="/assets/main-BgxxuBQ4.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/main-DPRBqQ6v.css">
   </head>
   <body>
     <!-- Made with ❤️ in India by Arnav (carnav.in) -->
@@ -222,6 +223,92 @@
           </article>
         </section>
 
+        <section aria-label="Sandbox Presets">
+          <h2>Iframe Sandbox Presets Comparison</h2>
+          <p>Compare our pre-configured sandbox presets to choose the correct balance between functionality and security for your embeds.</p>
+          <table>
+            <thead>
+              <tr>
+                <th>Preset Name</th>
+                <th>Enabled Sandbox Flags</th>
+                <th>Security Level</th>
+                <th>Recommended Use Case</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Secure</strong></td>
+                <td><code>None (Empty sandbox)</code></td>
+                <td>Maximum Security</td>
+                <td>Embedding untrusted or unknown external websites.</td>
+              </tr>
+              <tr>
+                <td><strong>Permissive</strong></td>
+                <td><code>scripts, forms, popups, same-origin, clipboard, presentation</code></td>
+                <td>Low Security</td>
+                <td>Highly trusted internal apps, dashboards, or portals.</td>
+              </tr>
+              <tr>
+                <td><strong>Media</strong></td>
+                <td><code>scripts, fullscreen, autoplay, presentation</code></td>
+                <td>Medium Security</td>
+                <td>Video embeds (YouTube, Vimeo, Twitch) and multimedia frames.</td>
+              </tr>
+              <tr>
+                <td><strong>Interactive</strong></td>
+                <td><code>scripts, forms, modals, clipboard, popups</code></td>
+                <td>Medium Security</td>
+                <td>Payment forms, login panels, and feedback widgets.</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section aria-label="Common Errors">
+          <h2>Common Iframe Errors &amp; Troubleshooting Solutions</h2>
+          <p>Diagnose and resolve the three most common iframe bugs encountered during web application integration:</p>
+          <dl>
+            <dt><strong>1. X-Frame-Options Header Blocked Error</strong></dt>
+            <dd>
+              <p><strong>Symptom:</strong> The iframe remains completely blank or displays a connection refused error message.</p>
+              <p><strong>Fix:</strong> Modify the target server configuration to remove the <code>X-Frame-Options: SAMEORIGIN</code> header or define specific allowed domains in the Content Security Policy (CSP) <code>frame-ancestors</code> directive.</p>
+            </dd>
+            
+            <dt><strong>2. HTTPS Protocol Mismatch (Mixed Content)</strong></dt>
+            <dd>
+              <p><strong>Symptom:</strong> The browser blocks loading of non-secure <code>http://</code> iframe URLs inside a secure <code>https://</code> parent page.</p>
+              <p><strong>Fix:</strong> Upgrade the source iframe URL from <code>http://</code> to <code>https://</code>, or run a local instance of the testing application.</p>
+            </dd>
+            
+            <dt><strong>3. SameSite Cookie Blocks (Session / Authentication Lost)</strong></dt>
+            <dd>
+              <p><strong>Symptom:</strong> Users are logged out, sessions fail to persist, or authentication fails when the app is loaded inside an iframe.</p>
+              <p><strong>Fix:</strong> Ensure all session/authentication cookies issued by the embedded page explicitly specify the <code>SameSite=None; Secure</code> attributes to permit cross-site context operations.</p>
+            </dd>
+          </dl>
+        </section>
+
+        <section aria-label="YouTube Case Study">
+          <h2>Case Study: How to Embed a YouTube Video Player</h2>
+          <p>YouTube and other video players require a custom mix of sandbox options to work correctly. Disabling scripts disables player controls, while omitting fullscreen options prevents enlarging the video.</p>
+          <p>Follow these settings to embed media players securely:</p>
+          <ul>
+            <li>Select the <strong>Media</strong> preset sandbox settings.</li>
+            <li>Enforce <code>allow-scripts</code> to execute the player controls JavaScript.</li>
+            <li>Configure the <code>allow="autoplay; fullscreen"</code> attributes to permit automated play and fullscreen layouts.</li>
+            <li>Add the <code>loading="lazy"</code> parameter to optimize page load speeds.</li>
+          </ul>
+          <pre><code>&lt;iframe
+  src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+  sandbox="allow-scripts"
+  allow="autoplay; fullscreen"
+  loading="lazy"
+  width="560"
+  height="315"
+  frameborder="0"
+&gt;&lt;/iframe&gt;</code></pre>
+        </section>
+
         <section aria-label="Frequently Asked Questions">
           <h2>Frequently Asked Questions</h2>
           <dl>
@@ -242,6 +329,9 @@
             
             <dt>What is the HTML iframe sandbox attribute and which values should I use?</dt>
             <dd>The sandbox attribute applies strict restrictions to the iframe content to isolate it from the parent page. By default, adding sandbox='' disables scripts, forms, popups, and same-origin cookies. You can grant selective permissions like allow-scripts (allows JS execution), allow-forms (allows submission), allow-popups (allows new tabs), and allow-same-origin (allows cookies) based on the level of trust you have in the embedded site.</dd>
+
+            <dt>How can I enforce HTTPS and enable Strict-Transport-Security (HSTS) on GitHub Pages?</dt>
+            <dd>GitHub Pages does not support configuring custom HTTP headers directly. To enable HSTS (Strict-Transport-Security) for your custom domain on GitHub Pages, you should configure a cloud proxy/CDN service like Cloudflare. In your Cloudflare dashboard, toggle 'Always Use HTTPS' and enable 'Strict Transport Security (HSTS)' under SSL/TLS > Edge Certificates settings.</dd>
           </dl>
         </section>
       </main>
