@@ -1,15 +1,11 @@
 import React, { useState } from 'react';
 import { 
-  BookOpen, 
-  HelpCircle, 
   ChevronDown, 
   ChevronUp, 
   Shield, 
   AlertTriangle, 
   Code, 
-  ExternalLink, 
   Cookie, 
-  Smartphone,
   Lock,
   Globe
 } from 'lucide-react';
