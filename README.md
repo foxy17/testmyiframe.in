@@ -1,4 +1,8 @@
-# 🖼️ Advanced Iframe Testing Application
+<p align="center">
+  <img src="./public/logo.png" alt="Iframe Tester Logo" width="100" />
+</p>
+
+# Advanced Iframe Testing Application
 
 ![Iframe Tester - Advanced Embedded Webpage Testing Tool](./public/og.png)
 
