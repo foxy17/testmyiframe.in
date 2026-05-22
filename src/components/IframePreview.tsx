@@ -312,7 +312,7 @@ export const IframePreview: React.FC<IframePreviewProps> = ({ config, isValid, i
                         if (iframe.contentWindow) {
                           handleIframeLoad();
                         }
-                      } catch (e) {
+                      } catch {
                         setTimeout(() => {
                           if (isLoading) {
                             console.log('Iframe loaded cross-origin safely');

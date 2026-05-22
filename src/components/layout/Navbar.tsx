@@ -13,7 +13,7 @@ export const Navbar: React.FC = () => {
       <div className="max-w-[1280px] mx-auto flex items-center justify-between">
         {/* Brand Logo and Title */}
         <Link to="/" className="flex items-center space-x-3 hover:opacity-90 transition-opacity">
-          <img src="/logo.png" alt="Iframe Tester Logo" className="w-8 h-8 object-contain" />
+          <img src="/logo.webp" alt="Iframe Tester Logo" className="w-8 h-8 object-contain" />
           <span className="font-clayDisplay font-semibold text-lg text-clay-ink tracking-tight">
             Iframe Tester
           </span>

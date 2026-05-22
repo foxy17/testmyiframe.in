@@ -1,6 +1,5 @@
 import React from 'react';
 import { IframeDimensions } from '../types/iframe';
-import { validateDimension } from '../utils/validation';
 
 interface DimensionControlsProps {
   dimensions: IframeDimensions;
