@@ -13,8 +13,8 @@ export function AttributesSection() {
   } = useIframeActions();
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-      <h2 className="text-lg font-semibold text-gray-800 mb-4">Security & Permissions</h2>
+    <div className="bg-clay-ochre text-clay-ink rounded-clay-xl border border-clay-ink/10 p-6">
+      <h2 className="text-lg font-semibold text-clay-ink mb-4">Security & Permissions</h2>
       <div className="space-y-6">
         <AttributePresets
           onSelectPreset={handleAttributePresetSelect}

@@ -10,10 +10,10 @@ export function DimensionsSection() {
   const { handleDimensionsChange, handlePresetSelect } = useIframeActions();
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+    <div className="bg-clay-peach text-clay-ink rounded-clay-xl border border-clay-ink/10 p-6">
       <div className="flex items-center space-x-2 mb-4">
-        <Settings className="w-5 h-5 text-gray-600" />
-        <h2 className="text-lg font-semibold text-gray-800">Dimensions</h2>
+        <Settings className="w-5 h-5 text-clay-ink/80" />
+        <h2 className="text-lg font-semibold text-clay-ink">Dimensions</h2>
       </div>
       
       <div className="space-y-6">

@@ -107,7 +107,7 @@ export const AttributePresets: React.FC<AttributePresetsProps> = ({
 }) => {
   return (
     <div className="space-y-3">
-      <label className="block text-sm font-medium text-gray-700">
+      <label className="block text-xs font-semibold text-clay-ink/75 uppercase tracking-wider">
         Security Presets
       </label>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -120,25 +120,19 @@ export const AttributePresets: React.FC<AttributePresetsProps> = ({
               key={preset.name}
               onClick={() => onSelectPreset(preset.attributes, preset.name)}
               className={`
-                flex items-start p-3 rounded-lg border-2 transition-all duration-200 text-left
+                flex items-start p-3 rounded-clay-md border transition-all duration-200 text-left
                 ${isSelected 
-                  ? 'border-blue-500 bg-blue-50' 
-                  : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
+                  ? 'border-clay-primary bg-clay-surface-card border-2 shadow-sm' 
+                  : 'border-clay-hairline bg-white hover:border-clay-primary/40 hover:bg-clay-canvas/50'
                 }
               `}
             >
-              <IconComponent className={`w-5 h-5 mt-0.5 mr-3 flex-shrink-0 ${
-                isSelected ? 'text-blue-600' : 'text-gray-500'
-              }`} />
+              <IconComponent className="w-5 h-5 mt-0.5 mr-3 flex-shrink-0 text-clay-ink/75" />
               <div className="flex-1">
-                <h4 className={`text-sm font-medium ${
-                  isSelected ? 'text-blue-900' : 'text-gray-900'
-                }`}>
+                <h4 className="text-sm font-semibold text-clay-ink">
                   {preset.name}
                 </h4>
-                <p className={`text-xs mt-1 ${
-                  isSelected ? 'text-blue-700' : 'text-gray-600'
-                }`}>
+                <p className="text-xs mt-1 text-clay-ink/65">
                   {preset.description}
                 </p>
               </div>

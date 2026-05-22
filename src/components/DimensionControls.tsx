@@ -47,7 +47,7 @@ export const DimensionControls: React.FC<DimensionControlsProps> = ({
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div className="space-y-2">
-        <label className="block text-sm font-medium text-gray-700">
+        <label className="block text-xs font-semibold text-clay-ink/75 uppercase tracking-wider">
           Width
         </label>
         <div className="flex space-x-2">
@@ -56,12 +56,12 @@ export const DimensionControls: React.FC<DimensionControlsProps> = ({
             value={dimensions.width}
             onChange={(e) => handleDimensionChange('width', e.target.value)}
             className={`
-              flex-1 rounded-lg border px-3 py-2 text-sm transition-colors
+              flex-1 min-w-0 rounded-clay-md border px-3 py-2 text-sm transition-all duration-200 bg-white text-clay-ink h-11
               ${errors.width 
-                ? 'border-red-300 focus:border-red-500 focus:ring-red-200' 
-                : 'border-gray-300 focus:border-blue-500 focus:ring-blue-200'
+                ? 'border-clay-error focus:border-clay-error bg-red-50' 
+                : 'border-clay-hairline focus:border-clay-primary'
               }
-              focus:outline-none focus:ring-2
+              focus:outline-none focus:ring-0
             `}
             placeholder="Enter width"
             min="1"
@@ -69,19 +69,19 @@ export const DimensionControls: React.FC<DimensionControlsProps> = ({
           <select
             value={dimensions.widthUnit}
             onChange={(e) => handleDimensionChange('width', e.target.value as 'px' | '%')}
-            className="rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"
+            className="w-16 flex-shrink-0 rounded-clay-md border border-clay-hairline bg-white px-2 py-2 text-sm text-clay-ink focus:border-clay-primary focus:outline-none focus:ring-0 h-11 transition-all cursor-pointer"
           >
             <option value="px">px</option>
             <option value="%">%</option>
           </select>
         </div>
         {errors.width && (
-          <p className="text-xs text-red-600">{errors.width}</p>
+          <p className="text-xs font-semibold text-clay-error mt-1">{errors.width}</p>
         )}
       </div>
 
       <div className="space-y-2">
-        <label className="block text-sm font-medium text-gray-700">
+        <label className="block text-xs font-semibold text-clay-ink/75 uppercase tracking-wider">
           Height
         </label>
         <div className="flex space-x-2">
@@ -90,12 +90,12 @@ export const DimensionControls: React.FC<DimensionControlsProps> = ({
             value={dimensions.height}
             onChange={(e) => handleDimensionChange('height', e.target.value)}
             className={`
-              flex-1 rounded-lg border px-3 py-2 text-sm transition-colors
+              flex-1 min-w-0 rounded-clay-md border px-3 py-2 text-sm transition-all duration-200 bg-white text-clay-ink h-11
               ${errors.height 
-                ? 'border-red-300 focus:border-red-500 focus:ring-red-200' 
-                : 'border-gray-300 focus:border-blue-500 focus:ring-blue-200'
+                ? 'border-clay-error focus:border-clay-error bg-red-50' 
+                : 'border-clay-hairline focus:border-clay-primary'
               }
-              focus:outline-none focus:ring-2
+              focus:outline-none focus:ring-0
             `}
             placeholder="Enter height"
             min="1"
@@ -103,14 +103,14 @@ export const DimensionControls: React.FC<DimensionControlsProps> = ({
           <select
             value={dimensions.heightUnit}
             onChange={(e) => handleDimensionChange('height', e.target.value as 'px' | '%')}
-            className="rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"
+            className="w-16 flex-shrink-0 rounded-clay-md border border-clay-hairline bg-white px-2 py-2 text-sm text-clay-ink focus:border-clay-primary focus:outline-none focus:ring-0 h-11 transition-all cursor-pointer"
           >
             <option value="px">px</option>
             <option value="%">%</option>
           </select>
         </div>
         {errors.height && (
-          <p className="text-xs text-red-600">{errors.height}</p>
+          <p className="text-xs font-semibold text-clay-error mt-1">{errors.height}</p>
         )}
       </div>
     </div>

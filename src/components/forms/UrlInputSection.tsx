@@ -19,10 +19,10 @@ export function UrlInputSection() {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+    <div className="bg-clay-lavender text-clay-ink rounded-clay-xl border border-clay-ink/10 p-6">
       <div className="flex items-center space-x-2 mb-4">
-        <Globe className="w-5 h-5 text-gray-600" />
-        <h2 className="text-lg font-semibold text-gray-800">Website URL</h2>
+        <Globe className="w-5 h-5 text-clay-ink/80" />
+        <h2 className="text-lg font-semibold text-clay-ink">Website URL</h2>
       </div>
       
       <div className="space-y-2">
@@ -32,22 +32,22 @@ export function UrlInputSection() {
           onChange={(e) => handleUrlChange(e.target.value)}
           placeholder="Enter website URL (e.g., example.com)"
           className={`
-            w-full rounded-lg border px-4 py-3 text-sm transition-colors
+            w-full rounded-clay-md border px-4 py-3 text-sm transition-all duration-200 h-11
             ${errors.url 
-              ? 'border-red-300 focus:border-red-500 focus:ring-red-200' 
-              : 'border-gray-300 focus:border-blue-500 focus:ring-blue-200'
+              ? 'border-clay-error text-clay-error placeholder-clay-error/60 bg-red-50 focus:border-clay-error' 
+              : 'border-clay-hairline bg-white text-clay-ink focus:border-clay-primary'
             }
-            focus:outline-none focus:ring-2
+            focus:outline-none focus:ring-0
           `}
         />
         {errors.url && (
-          <p className="text-sm text-red-600">{errors.url}</p>
+          <p className="text-xs font-semibold text-clay-error mt-1">{errors.url}</p>
         )}
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-xs font-semibold text-clay-ink/75 mb-1 uppercase tracking-wider">
             Title (optional)
           </label>
           <input
@@ -55,11 +55,11 @@ export function UrlInputSection() {
             value={config.title || ''}
             onChange={(e) => handleConfigChange('title', e.target.value)}
             placeholder="Iframe title"
-            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"
+            className="w-full rounded-clay-md border border-clay-hairline bg-white px-3 py-2 text-sm text-clay-ink h-11 focus:border-clay-primary focus:outline-none focus:ring-0 transition-colors"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-xs font-semibold text-clay-ink/75 mb-1 uppercase tracking-wider">
             Name (optional)
           </label>
           <input
@@ -67,28 +67,28 @@ export function UrlInputSection() {
             value={config.name || ''}
             onChange={(e) => handleConfigChange('name', e.target.value)}
             placeholder="Iframe name"
-            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"
+            className="w-full rounded-clay-md border border-clay-hairline bg-white px-3 py-2 text-sm text-clay-ink h-11 focus:border-clay-primary focus:outline-none focus:ring-0 transition-colors"
           />
         </div>
       </div>
 
       {/* Render Button */}
-      <div className="mt-6 pt-4 border-t border-gray-200">
+      <div className="mt-6 pt-4 border-t border-clay-ink/10">
         <button
           onClick={handleRenderIframe}
           disabled={!isValid}
           className={`
-            w-full flex items-center justify-center space-x-2 px-6 py-3 rounded-lg font-medium transition-all
+            w-full flex items-center justify-center space-x-2 px-6 py-3 rounded-clay-md font-semibold transition-all h-11
             ${isValid
-              ? 'bg-blue-600 text-white hover:bg-blue-700 hover:scale-105 shadow-lg'
-              : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+              ? 'bg-clay-primary text-white hover:bg-clay-primary-active active:scale-[0.99] shadow-md hover:shadow-lg'
+              : 'bg-clay-primary-disabled text-clay-muted cursor-not-allowed'
             }
           `}
         >
-          <Play className="w-5 h-5" />
+          <Play className="w-4 h-4 fill-current" />
           <span>Render Iframe</span>
         </button>
-        <p className="text-xs text-gray-500 mt-2 text-center">
+        <p className="text-xs text-clay-ink/60 mt-2 text-center">
           This will reload the page with your iframe settings applied
         </p>
       </div>

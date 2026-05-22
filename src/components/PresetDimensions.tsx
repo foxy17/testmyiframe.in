@@ -27,7 +27,7 @@ export const PresetDimensions: React.FC<PresetDimensionsProps> = ({
 }) => {
   return (
     <div className="space-y-3">
-      <label className="block text-sm font-medium text-gray-700">
+      <label className="block text-xs font-semibold text-clay-ink/75 uppercase tracking-wider">
         Quick Presets
       </label>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
@@ -40,16 +40,16 @@ export const PresetDimensions: React.FC<PresetDimensionsProps> = ({
               key={preset.name}
               onClick={() => onSelectPreset(preset)}
               className={`
-                flex flex-col items-center p-3 rounded-lg border-2 transition-all duration-200
+                flex flex-col items-center p-3 rounded-clay-md border transition-all duration-200
                 ${isSelected 
-                  ? 'border-blue-500 bg-blue-50 text-blue-700' 
-                  : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
+                  ? 'border-clay-primary bg-clay-surface-card text-clay-ink border-2 shadow-sm scale-[0.98]' 
+                  : 'border-clay-hairline bg-white text-clay-ink/80 hover:border-clay-primary/40 hover:bg-clay-canvas/50'
                 }
               `}
             >
-              <IconComponent className="w-5 h-5 mb-1" />
-              <span className="text-xs font-medium">{preset.name}</span>
-              <span className="text-xs text-gray-500">
+              <IconComponent className="w-4 h-4 mb-1 text-clay-ink/75" />
+              <span className="text-xs font-semibold">{preset.name}</span>
+              <span className="text-[10px] text-clay-ink/60">
                 {preset.width} × {preset.height}
               </span>
             </button>
