@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Favicon and Icon Configuration -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/favicon.ico" />
+    <link rel="mask-icon" href="/favicon.ico" color="#3B82F6" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Primary SEO Meta Tags -->
+    <title>Iframe Testing &amp; Debugging Guide - How to Test Iframes</title>
+    <meta name="description" content="Learn how to test and debug HTML iframes. A step-by-step checklist to troubleshoot security headers (X-Frame-Options, CSP), same-origin issues, browser sandbox controls, and third-party cookies." />
+    <meta name="keywords" content="iframe testing guide, iframe debugger, x-frame-options troubleshooting, csp frame-ancestors, iframe sandbox attribute, third-party cookies, samesite secure, web security, embedding checklist" />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://testmyiframe.in/guide" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://testmyiframe.in/guide" />
+    <meta property="og:title" content="Iframe Testing &amp; Debugging Guide - How to Test Iframes" />
+    <meta property="og:description" content="Learn how to test and debug HTML iframes. A step-by-step checklist to troubleshoot security headers (X-Frame-Options, CSP), same-origin issues, browser sandbox controls, and third-party cookies." />
+    <meta property="og:image" content="https://testmyiframe.in/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Iframe Testing &amp; Debugging Guide - How to Test Iframes" />
+    <meta property="og:site_name" content="Iframe Testing Application" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://testmyiframe.in/guide" />
+    <meta property="twitter:title" content="Iframe Testing &amp; Debugging Guide - How to Test Iframes" />
+    <meta property="twitter:description" content="Learn how to test and debug HTML iframes. A step-by-step checklist to troubleshoot security headers (X-Frame-Options, CSP), same-origin issues, browser sandbox controls, and third-party cookies." />
+    <meta property="twitter:image" content="https://testmyiframe.in/twitter-og.png" />
+    <meta property="twitter:image:alt" content="Iframe Testing &amp; Debugging Guide - How to Test Iframes" />
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Arnav - Made with ❤️ in India" />
+    <meta name="application-name" content="Iframe Tester" />
+    <meta name="theme-color" content="#3B82F6" />
+    
+    <!-- Creator Information -->
+    <meta name="creator" content="Arnav" />
+    <meta name="developer" content="Arnav - carnav.in" />
+    
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "FAQPage",
+          "@id": "https://testmyiframe.in/guide#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is an iframe tester and why do developers use it?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "An iframe tester is an online utility that simulates how a webpage renders within an HTML <iframe> element. Developers use it to verify embeddability, analyze browser security policies, test responsive layout breakpoints, and debug cross-origin restriction issues during integration."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Why does the iframe show 'Refused to connect' or remain completely blank?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "This security barrier is triggered by HTTP headers on the target website. Specifically, the X-Frame-Options header (configured as DENY or SAMEORIGIN) or Content Security Policy (CSP) frame-ancestors directive prevents external websites from embedding their content to protect against clickjacking and security exploits."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How can I allow other websites to embed my webpage in an iframe?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "To permit embedding, you must configure your server's HTTP headers. You should modify or remove the X-Frame-Options header, or define specific trusted origins in your Content Security Policy (CSP) using the frame-ancestors directive (e.g., Content-Security-Policy: frame-ancestors 'self' https://trusteddomain.com)."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Why do some cookies or login states fail inside the embedded iframe?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Modern web browsers enforce strict security policies regarding third-party cookies. If your embedded webpage sets cookies without the 'SameSite=None; Secure' attributes, the browser will block them. This causes authentication states, user sessions, and shopping carts to fail when loaded inside an iframe context."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I test non-HTTPS (HTTP) URLs in this iframe tester?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "If the parent testing tool is loaded over HTTPS, browsers enforce mixed content restrictions and block any non-secure HTTP iframe sources. For local development or HTTP testing, you can use our tool, but you may need to load the application locally or adjust your browser security settings temporarily to allow insecure content."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is the HTML iframe sandbox attribute and which values should I use?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The sandbox attribute applies strict restrictions to the iframe content to isolate it from the parent page. By default, adding sandbox='' disables scripts, forms, popups, and same-origin cookies. You can grant selective permissions like allow-scripts, allow-forms, allow-popups, and allow-same-origin based on the level of trust you have in the embedded site."
+              }
+            }
+          ]
+        },
+        {
+          "@type": "HowTo",
+          "@id": "https://testmyiframe.in/guide#howto",
+          "name": "How to Test and Debug Iframes",
+          "description": "A step-by-step checklist to test webpage embed capability, adjust sandbox security, and debug errors.",
+          "step": [
+            {
+              "@type": "HowToStep",
+              "position": 1,
+              "name": "Enter Webpage URL",
+              "text": "Type or paste the URL of the webpage you want to test. Ensure it includes the protocol (e.g., https://)."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 2,
+              "name": "Configure Security Sandbox",
+              "text": "Select which permissions to allow. Use our presets like 'Secure' for untrusted pages or 'Permissive' for full features."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 3,
+              "name": "Adjust Responsive Dimensions",
+              "text": "Test how the iframe renders in different device viewports using presets (mobile, tablet, desktop) or set custom dimensions."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 4,
+              "name": "Analyze Diagnostics & Code",
+              "text": "If it fails, review security headers in the debug panel. Once satisfied, copy the auto-generated clean iframe HTML."
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+    
+    <!-- Preconnect for Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Additional Meta for Crawlers -->
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    
+    <!-- Mobile App Meta -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Iframe Tester Guide" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    
+    <!-- Geo Meta -->
+    <meta name="geo.region" content="US" />
+    <meta name="geo.placename" content="United States" />
+    
+    <!-- Additional Security & Performance -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="format-detection" content="telephone=no" />
+    <script type="module" crossorigin src="/assets/main-BdO2wFjL.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/main-BbH3rEpn.css">
+  </head>
+  <body>
+    <!-- Made with ❤️ in India by Arnav (carnav.in) -->
+    <div id="root">
+      <!-- SEO Fallback Content for Crawlers and Non-JS users -->
+      <header>
+        <h1>How to Test and Debug Iframes - Complete Developer Guide</h1>
+        <p>Check webpage embed capabilities, configure security sandbox policies, troubleshoot blank frames, and resolve cross-origin issues.</p>
+      </header>
+
+      <main>
+        <section aria-label="Checklist Steps">
+          <h2>Iframe Testing Checklist</h2>
+          <ol>
+            <li>
+              <strong>Enter Webpage URL:</strong> Type or paste the URL of the webpage you want to test. Ensure it includes the protocol (e.g., https://).
+            </li>
+            <li>
+              <strong>Configure Security Sandbox:</strong> Select which permissions to allow. Use our presets like 'Secure' for untrusted pages or 'Permissive' for full features.
+            </li>
+            <li>
+              <strong>Adjust Responsive Dimensions:</strong> Test how the iframe renders in different device viewports using presets (mobile, tablet, desktop) or set custom dimensions.
+            </li>
+            <li>
+              <strong>Analyze Diagnostics &amp; Code:</strong> If it fails, review security headers in the debug panel. Once satisfied, copy the auto-generated clean iframe HTML.
+            </li>
+          </ol>
+        </section>
+
+        <section aria-label="Deep-Dive Concepts">
+          <h2>Deep-Dive: Iframe Security &amp; Troubleshooting</h2>
+          <article>
+            <h3>What is an Iframe Tester?</h3>
+            <p>An iframe tester lets you preview how external websites display when embedded in an HTML iframe element. It is an essential utility for developers building integrations, portals, dashboards, widget loaders, or web applications that depend on embedded content.</p>
+          </article>
+          <article>
+            <h3>X-Frame-Options &amp; CSP</h3>
+            <p>HTTP headers are the most common cause of iframe failures. If a site responds with X-Frame-Options: DENY or a Content Security Policy (CSP) directive like frame-ancestors 'self', the browser will refuse to load it to protect against clickjacking attacks.</p>
+          </article>
+          <article>
+            <h3>The Sandbox Attribute</h3>
+            <p>The sandbox HTML attribute enforces strict security restrictions on embedded webpages. It allows developers to prevent untrusted content from running malicious scripts, submitting unwanted forms, creating popup windows, or hijacking the parent page navigation.</p>
+          </article>
+          <article>
+            <h3>Troubleshooting Errors</h3>
+            <p>When an iframe fails, check the browser's developer console (F12) for error logs. Use the context selector dropdown in the Console/Elements panel to switch scope to the iframe to run queries inside it, and check the Network tab's response headers for CSP/X-Frame-Options blocks.</p>
+          </article>
+          <article>
+            <h3>HTML Code Generator</h3>
+            <p>Configure your iframe's dimensions, sandbox privileges, and style options in real-time. Once the setup renders correctly, use our automated code generator to copy clean, production-ready HTML code to drop directly into your project files.</p>
+          </article>
+          <article>
+            <h3>SameSite Cookie Issues</h3>
+            <p>To prevent cross-site tracking, modern browsers block third-party cookies inside iframes. If your login/session fails, open DevTools and inspect the Application &gt; Cookies tab for your domain, or check the Issues tab for warning notices about missing SameSite=None; Secure attributes.</p>
+          </article>
+        </section>
+
+        <section aria-label="Frequently Asked Questions">
+          <h2>Frequently Asked Questions</h2>
+          <dl>
+            <dt>What is an iframe tester and why do developers use it?</dt>
+            <dd>An iframe tester is an online utility that simulates how a webpage renders within an HTML iframe element. Developers use it to verify embeddability, analyze browser security policies, test responsive layout breakpoints, and debug cross-origin restriction issues during integration.</dd>
+            
+            <dt>Why does the iframe show 'Refused to connect' or remain completely blank?</dt>
+            <dd>This security barrier is triggered by HTTP headers on the target website. Specifically, the X-Frame-Options header (configured as DENY or SAMEORIGIN) or Content Security Policy (CSP) frame-ancestors directive prevents external websites from embedding their content. This is a critical security protocol implemented by major web properties to prevent clickjacking and security exploits.</dd>
+            
+            <dt>How can I allow other websites to embed my webpage in an iframe?</dt>
+            <dd>To permit embedding, you must configure your server's HTTP headers. You should modify or remove the X-Frame-Options header, or define specific trusted origins in your Content Security Policy (CSP) using the frame-ancestors directive (e.g., Content-Security-Policy: frame-ancestors 'self' https://trusteddomain.com).</dd>
+            
+            <dt>Why do some cookies or login states fail inside the embedded iframe?</dt>
+            <dd>Modern web browsers enforce strict security policies regarding third-party cookies. If your embedded webpage sets cookies without the 'SameSite=None; Secure' attributes, the browser will block them. This causes authentication states, user sessions, and shopping carts to fail when loaded inside an iframe context.</dd>
+            
+            <dt>Can I test non-HTTPS (HTTP) URLs in this iframe tester?</dt>
+            <dd>If the parent testing tool is loaded over HTTPS, browsers enforce mixed content restrictions and block any non-secure HTTP iframe sources. For local development or HTTP testing, you can use our tool, but you may need to load the application locally or adjust your browser security settings temporarily to allow insecure content.</dd>
+            
+            <dt>What is the HTML iframe sandbox attribute and which values should I use?</dt>
+            <dd>The sandbox attribute applies strict restrictions to the iframe content to isolate it from the parent page. By default, adding sandbox='' disables scripts, forms, popups, and same-origin cookies. You can grant selective permissions like allow-scripts (allows JS execution), allow-forms (allows submission), allow-popups (allows new tabs), and allow-same-origin (allows cookies) based on the level of trust you have in the embedded site.</dd>
+          </dl>
+        </section>
+      </main>
+
+      <footer>
+        <p>Iframe Tester - Made with &hearts; in India by Arnav. All Rights Reserved.</p>
+        <p><a href="/">Back to Iframe Tester Tool</a></p>
+      </footer>
+    </div>
+    
+    <!-- Single Page Apps for GitHub Pages -->
+    <script type="text/javascript">
+      (function(l) {
+        if (l.search[1] === '/' ) {
+          var decoded = l.search.slice(1).split('&').map(function(s) { 
+            return s.replace(/~and~/g, '&')
+          }).join('?');
+          window.history.replaceState(null, null,
+              l.pathname.slice(0, -1) + decoded + l.hash
+          );
+        }
+      }(window.location))
+    </script>
+    
+    <!-- GoatCounter analytics -->
+    <script
+      data-goatcounter="https://testmyiframe.goatcounter.com/count"
+      async
+      src="//gc.zgo.at/count.js"
+    ></script>
+  </body>
+</html>

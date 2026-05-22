@@ -7,7 +7,7 @@
   <!-- Main page -->
   <url>
     <loc>https://testmyiframe.in/</loc>
-    <lastmod>2024-12-19</lastmod>
+    <lastmod>2026-05-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -15,9 +15,17 @@
   <!-- Alternative URLs that might be accessed -->
   <url>
     <loc>https://testmyiframe.in</loc>
-    <lastmod>2024-12-19</lastmod>
+    <lastmod>2026-05-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+  </url>
+
+  <!-- Guide & FAQ Page -->
+  <url>
+    <loc>https://testmyiframe.in/guide</loc>
+    <lastmod>2026-05-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
 
 </urlset> 
