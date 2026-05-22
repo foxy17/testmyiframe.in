@@ -2,6 +2,11 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <script type="text/javascript">
+      if (window.location.protocol === 'http:' && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+        window.location.replace(window.location.href.replace('http:', 'https:'));
+      }
+    </script>
     <!-- Favicon and Icon Configuration -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="shortcut icon" href="/favicon.ico" />
@@ -11,7 +16,7 @@
     
     <!-- Primary SEO Meta Tags -->
     <title>Iframe Testing &amp; Debugging Guide - How to Test Iframes</title>
-    <meta name="description" content="Learn how to test and debug HTML iframes. A step-by-step checklist to troubleshoot security headers (X-Frame-Options, CSP), same-origin issues, browser sandbox controls, and third-party cookies." />
+    <meta name="description" content="Learn how to test and debug HTML iframes. Step-by-step troubleshooting for security headers, sandbox permissions, and third-party SameSite cookies." />
     <meta name="keywords" content="iframe testing guide, iframe debugger, x-frame-options troubleshooting, csp frame-ancestors, iframe sandbox attribute, third-party cookies, samesite secure, web security, embedding checklist" />
     
     <!-- Canonical URL -->
@@ -21,7 +26,7 @@
     <meta property="og:type" content="article" />
     <meta property="og:url" content="https://testmyiframe.in/guide" />
     <meta property="og:title" content="Iframe Testing &amp; Debugging Guide - How to Test Iframes" />
-    <meta property="og:description" content="Learn how to test and debug HTML iframes. A step-by-step checklist to troubleshoot security headers (X-Frame-Options, CSP), same-origin issues, browser sandbox controls, and third-party cookies." />
+    <meta property="og:description" content="Learn how to test and debug HTML iframes. Step-by-step troubleshooting for security headers, sandbox permissions, and third-party SameSite cookies." />
     <meta property="og:image" content="https://testmyiframe.in/og.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -32,7 +37,7 @@
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content="https://testmyiframe.in/guide" />
     <meta property="twitter:title" content="Iframe Testing &amp; Debugging Guide - How to Test Iframes" />
-    <meta property="twitter:description" content="Learn how to test and debug HTML iframes. A step-by-step checklist to troubleshoot security headers (X-Frame-Options, CSP), same-origin issues, browser sandbox controls, and third-party cookies." />
+    <meta property="twitter:description" content="Learn how to test and debug HTML iframes. Step-by-step troubleshooting for security headers, sandbox permissions, and third-party SameSite cookies." />
     <meta property="twitter:image" content="https://testmyiframe.in/twitter-og.png" />
     <meta property="twitter:image:alt" content="Iframe Testing &amp; Debugging Guide - How to Test Iframes" />
     
@@ -164,7 +169,7 @@
     <!-- Additional Security & Performance -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="format-detection" content="telephone=no" />
-    <script type="module" crossorigin src="/assets/main-BgxxuBQ4.js"></script>
+    <script type="module" crossorigin src="/assets/main-C53Smcc9.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/main-DPRBqQ6v.css">
   </head>
   <body>
