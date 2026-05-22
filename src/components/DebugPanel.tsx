@@ -68,51 +68,51 @@ Troubleshooting Tips:
   }
 
   return (
-    <div className="bg-gray-50 rounded-xl border border-gray-200 p-4">
+    <div className="bg-clay-surface-card text-clay-ink rounded-clay-lg border border-clay-ink/10 p-5">
       <button
         onClick={() => setIsExpanded(!isExpanded)}
-        className="flex items-center justify-between w-full text-left"
+        className="flex items-center justify-between w-full text-left focus:outline-none"
       >
-        <div className="flex items-center space-x-2">
-          <Bug className="w-4 h-4 text-gray-600" />
-          <h3 className="text-sm font-medium text-gray-800">Debug Information</h3>
+        <div className="flex items-center space-x-2.5">
+          <Bug className="w-4.5 h-4.5 text-clay-ink/80" />
+          <h3 className="text-sm font-semibold text-clay-ink">Debug Information</h3>
         </div>
         {isExpanded ? (
-          <ChevronUp className="w-4 h-4 text-gray-600" />
+          <ChevronUp className="w-4.5 h-4.5 text-clay-ink/60" />
         ) : (
-          <ChevronDown className="w-4 h-4 text-gray-600" />
+          <ChevronDown className="w-4.5 h-4.5 text-clay-ink/60" />
         )}
       </button>
 
       {isExpanded && (
-        <div className="mt-4 space-y-3">
+        <div className="mt-4 space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
             <div>
-              <h4 className="font-medium text-gray-700 mb-1">URL Details</h4>
-              <div className="space-y-1 text-gray-600">
-                <div><span className="font-medium">Protocol:</span> {debugInfo.protocol}</div>
-                <div><span className="font-medium">Hostname:</span> {debugInfo.hostname}</div>
-                <div><span className="font-medium">Dimensions:</span> {debugInfo.dimensions}</div>
+              <h4 className="font-semibold text-clay-ink mb-1.5 uppercase tracking-wider text-[10px]">URL Details</h4>
+              <div className="space-y-1 text-clay-body">
+                <div><span className="font-semibold text-clay-ink/80">Protocol:</span> {debugInfo.protocol}</div>
+                <div><span className="font-semibold text-clay-ink/80">Hostname:</span> {debugInfo.hostname}</div>
+                <div><span className="font-semibold text-clay-ink/80">Dimensions:</span> {debugInfo.dimensions}</div>
               </div>
             </div>
 
             <div>
-              <h4 className="font-medium text-gray-700 mb-1">Security Settings</h4>
-              <div className="space-y-1 text-gray-600">
+              <h4 className="font-semibold text-clay-ink mb-1.5 uppercase tracking-wider text-[10px]">Security Settings</h4>
+              <div className="space-y-1 text-clay-body">
                 <div>
-                  <span className="font-medium">Sandbox:</span> 
+                  <span className="font-semibold text-clay-ink/80">Sandbox:</span> 
                   {debugInfo.sandboxAttributes.length > 0 ? (
-                    <span className="ml-1">{debugInfo.sandboxAttributes.join(', ')}</span>
+                    <span className="ml-1 text-clay-body">{debugInfo.sandboxAttributes.join(', ')}</span>
                   ) : (
-                    <span className="ml-1 text-orange-600">No restrictions</span>
+                    <span className="ml-1 text-clay-coral font-semibold">No restrictions</span>
                   )}
                 </div>
                 <div>
-                  <span className="font-medium">Permissions:</span> 
+                  <span className="font-semibold text-clay-ink/80">Permissions:</span> 
                   {debugInfo.allowAttributes.length > 0 ? (
-                    <span className="ml-1">{debugInfo.allowAttributes.join(', ')}</span>
+                    <span className="ml-1 text-clay-body">{debugInfo.allowAttributes.join(', ')}</span>
                   ) : (
-                    <span className="ml-1 text-gray-500">None</span>
+                    <span className="ml-1 text-clay-muted">None</span>
                   )}
                 </div>
               </div>
@@ -121,29 +121,29 @@ Troubleshooting Tips:
 
           {debugInfo.customAttributes.length > 0 && (
             <div>
-              <h4 className="font-medium text-gray-700 mb-1 text-xs">Custom Attributes</h4>
-              <div className="text-xs text-gray-600">
+              <h4 className="font-semibold text-clay-ink mb-1.5 uppercase tracking-wider text-[10px]">Custom Attributes</h4>
+              <div className="text-xs text-clay-body space-y-0.5">
                 {debugInfo.customAttributes.map((attr, index) => (
                   <div key={index}>
-                    <span className="font-medium">{attr.name}:</span> {attr.value}
+                    <span className="font-semibold text-clay-ink/80">{attr.name}:</span> {attr.value}
                   </div>
                 ))}
               </div>
             </div>
           )}
 
-          <div className="pt-2 border-t border-gray-200">
+          <div className="pt-3 border-t border-clay-ink/10">
             <button
               onClick={handleCopyDebugInfo}
               className={`
-                flex items-center space-x-2 px-3 py-1.5 rounded-lg text-xs transition-colors
+                flex items-center space-x-2 px-3.5 py-2 rounded-clay-md text-xs font-semibold transition-all active:scale-[0.98]
                 ${isCopied 
-                  ? 'bg-green-100 text-green-700' 
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  ? 'bg-clay-mint text-clay-ink border border-clay-ink/10' 
+                  : 'bg-clay-primary text-white hover:bg-clay-primary-active'
                 }
               `}
             >
-              {isCopied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
+              {isCopied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
               <span>{isCopied ? 'Copied!' : 'Copy Debug Info'}</span>
             </button>
           </div>
