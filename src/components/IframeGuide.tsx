@@ -73,6 +73,10 @@ export const IframeGuide: React.FC = () => {
     {
       question: "What is the HTML iframe sandbox attribute and which values should I use?",
       answer: "The sandbox attribute applies strict restrictions to the iframe content to isolate it from the parent page. By default, adding sandbox='' disables scripts, forms, popups, and same-origin cookies. You can grant selective permissions like allow-scripts (allows JS execution), allow-forms (allows submission), allow-popups (allows new tabs), and allow-same-origin (allows cookies) based on the level of trust you have in the embedded site."
+    },
+    {
+      question: "How can I enforce HTTPS and enable Strict-Transport-Security (HSTS) on GitHub Pages?",
+      answer: "GitHub Pages does not support configuring custom HTTP headers directly. To enable HSTS (Strict-Transport-Security) for your custom domain on GitHub Pages, you should configure a cloud proxy/CDN service like Cloudflare. In your Cloudflare dashboard, toggle 'Always Use HTTPS' and enable 'Strict Transport Security (HSTS)' under SSL/TLS > Edge Certificates settings."
     }
   ];
 
@@ -232,7 +236,169 @@ export const IframeGuide: React.FC = () => {
               <span>State & Authentication</span>
             </div>
           </div>
+        </div>
+      </div>
 
+      {/* Preset Comparison Table */}
+      <div className="space-y-8">
+        <div className="text-center lg:text-left space-y-4">
+          <h2 className="text-3xl sm:text-4xl font-clayDisplay font-medium tracking-[-0.03em] text-clay-ink">
+            Iframe Sandbox Presets Comparison
+          </h2>
+          <p className="text-clay-body text-base max-w-3xl leading-relaxed font-clayBody">
+            Compare our pre-configured sandbox presets to choose the correct balance between functionality and security for your embeds.
+          </p>
+        </div>
+
+        <div className="border border-clay-hairline rounded-clay-lg overflow-hidden bg-clay-surface-card shadow-sm">
+          <div className="overflow-x-auto">
+            <table className="w-full text-left border-collapse text-sm">
+              <thead>
+                <tr className="bg-clay-surface-strong border-b border-clay-hairline">
+                  <th className="p-4 font-clayDisplay font-semibold text-clay-ink">Preset Name</th>
+                  <th className="p-4 font-clayDisplay font-semibold text-clay-ink">Enabled Attributes</th>
+                  <th className="p-4 font-clayDisplay font-semibold text-clay-ink">Security Profile</th>
+                  <th className="p-4 font-clayDisplay font-semibold text-clay-ink">Ideal Use Case</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-clay-hairline">
+                <tr className="hover:bg-white/40 transition-colors">
+                  <td className="p-4 font-semibold text-clay-ink">🛡️ Secure</td>
+                  <td className="p-4 text-clay-body text-xs font-mono">None (Empty sandbox)</td>
+                  <td className="p-4"><span className="px-2 py-0.5 rounded-clay-pill bg-clay-ink text-white text-xs font-semibold">Maximum</span></td>
+                  <td className="p-4 text-clay-body">Embedding completely untrusted or third-party external webpages.</td>
+                </tr>
+                <tr className="hover:bg-white/40 transition-colors">
+                  <td className="p-4 font-semibold text-clay-ink">✅ Permissive</td>
+                  <td className="p-4 text-clay-body text-xs font-mono">scripts, forms, popups, same-origin, clipboard, presentation</td>
+                  <td className="p-4"><span className="px-2 py-0.5 rounded-clay-pill bg-clay-peach-dark text-white text-xs font-semibold">Low</span></td>
+                  <td className="p-4 text-clay-body">Highly trusted internal tools or widgets requiring full interaction.</td>
+                </tr>
+                <tr className="hover:bg-white/40 transition-colors">
+                  <td className="p-4 font-semibold text-clay-ink">🎥 Media</td>
+                  <td className="p-4 text-clay-body text-xs font-mono">scripts, fullscreen, autoplay, presentation</td>
+                  <td className="p-4"><span className="px-2 py-0.5 rounded-clay-pill bg-clay-lavender-dark text-white text-xs font-semibold">Medium</span></td>
+                  <td className="p-4 text-clay-body">Video players (YouTube, Vimeo, Twitch) and multimedia embeds.</td>
+                </tr>
+                <tr className="hover:bg-white/40 transition-colors">
+                  <td className="p-4 font-semibold text-clay-ink">🔄 Interactive</td>
+                  <td className="p-4 text-clay-body text-xs font-mono">scripts, forms, modals, clipboard, popups</td>
+                  <td className="p-4"><span className="px-2 py-0.5 rounded-clay-pill bg-clay-ochre-dark text-white text-xs font-semibold">Medium</span></td>
+                  <td className="p-4 text-clay-body">Payment gateways, sign-in forms, and interactive feedback widgets.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      {/* Troubleshooting Matrix */}
+      <div className="space-y-8">
+        <div className="text-center lg:text-left space-y-4">
+          <h2 className="text-3xl sm:text-4xl font-clayDisplay font-medium tracking-[-0.03em] text-clay-ink">
+            Common Iframe Errors & Solutions
+          </h2>
+          <p className="text-clay-body text-base max-w-3xl leading-relaxed font-clayBody">
+            Diagnose and fix the three most common iframe bugs encountered during web integration.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="bg-clay-surface-card border border-clay-hairline rounded-clay-lg p-6 space-y-4 shadow-sm hover:scale-[1.01] transition-transform duration-200">
+            <div className="flex items-center space-x-2 text-clay-error">
+              <span className="text-xl font-bold">🚫</span>
+              <span className="font-clayDisplay font-bold text-xs uppercase tracking-[0.5px]">Headers Blocked</span>
+            </div>
+            <div className="space-y-2">
+              <h3 className="font-clayDisplay font-semibold text-clay-ink text-base">X-Frame-Options Error</h3>
+              <p className="text-xs text-clay-body leading-relaxed">
+                <strong>Symptom:</strong> The frame stays blank or says "Connection Refused".
+              </p>
+              <p className="text-xs text-clay-body leading-relaxed">
+                <strong>Fix:</strong> Modify the target server headers to remove <code>X-Frame-Options: SAMEORIGIN</code> or configure the CSP <code>frame-ancestors</code> directive to whitelist your host.
+              </p>
+            </div>
+          </div>
+
+          <div className="bg-clay-surface-card border border-clay-hairline rounded-clay-lg p-6 space-y-4 shadow-sm hover:scale-[1.01] transition-transform duration-200">
+            <div className="flex items-center space-x-2 text-clay-peach-dark">
+              <span className="text-xl font-bold">⚠️</span>
+              <span className="font-clayDisplay font-bold text-xs uppercase tracking-[0.5px]">Mixed Content</span>
+            </div>
+            <div className="space-y-2">
+              <h3 className="font-clayDisplay font-semibold text-clay-ink text-base">HTTPS Protocol Mismatch</h3>
+              <p className="text-xs text-clay-body leading-relaxed">
+                <strong>Symptom:</strong> Browser blocks loading of HTTP iframe urls.
+              </p>
+              <p className="text-xs text-clay-body leading-relaxed">
+                <strong>Fix:</strong> Upgrade the source iframe URL from <code>http://</code> to <code>https://</code>, or host and run this testing application on a local server.
+              </p>
+            </div>
+          </div>
+
+          <div className="bg-clay-surface-card border border-clay-hairline rounded-clay-lg p-6 space-y-4 shadow-sm hover:scale-[1.01] transition-transform duration-200">
+            <div className="flex items-center space-x-2 text-clay-lavender-dark">
+              <span className="text-xl font-bold">🔑</span>
+              <span className="font-clayDisplay font-bold text-xs uppercase tracking-[0.5px]">Session Lost</span>
+            </div>
+            <div className="space-y-2">
+              <h3 className="font-clayDisplay font-semibold text-clay-ink text-base">SameSite Cookie Blocks</h3>
+              <p className="text-xs text-clay-body leading-relaxed">
+                <strong>Symptom:</strong> Users are logged out or sessions fail inside the iframe.
+              </p>
+              <p className="text-xs text-clay-body leading-relaxed">
+                <strong>Fix:</strong> Ensure the cookies issued by the embedded webpage explicitly set <code>SameSite=None; Secure</code> to allow third-party context operations.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Case Study Example */}
+      <div className="space-y-8">
+        <div className="bg-clay-surface-card border border-clay-hairline rounded-clay-xl p-8 space-y-6 shadow-sm">
+          <div className="space-y-2">
+            <div className="inline-block px-3 py-1 bg-clay-lavender/30 text-clay-lavender-dark rounded-clay-pill font-bold text-xs uppercase tracking-wider">
+              Example Case Study
+            </div>
+            <h3 className="text-2xl font-clayDisplay font-medium text-clay-ink">
+              How to Embed a YouTube Video Player
+            </h3>
+            <p className="text-sm text-clay-body leading-relaxed max-w-3xl font-clayBody">
+              YouTube and other media players require a careful mix of sandbox features. Disabling scripts completely makes the player un-interactive, while failing to allow fullscreen blocks native sizing options.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            <div className="space-y-4 text-sm text-clay-body leading-relaxed font-clayBody">
+              <p>
+                To embed YouTube securely while maintaining full functionality:
+              </p>
+              <ul className="list-disc pl-5 space-y-2">
+                <li>Use the <strong>Media</strong> preset configuration.</li>
+                <li>Ensure <code>allow-scripts</code> is toggled in the sandbox attribute to run the video player runtime.</li>
+                <li>Add the <code>allow="autoplay; fullscreen"</code> parameter so YouTube can invoke autoplay events and enter fullscreen mode on double-click.</li>
+                <li>Set <code>loading="lazy"</code> to defer loading the iframe until it is close to the viewport.</li>
+              </ul>
+            </div>
+
+            <div className="bg-clay-surface-strong border border-clay-hairline rounded-clay-lg p-6 font-mono text-xs text-clay-ink overflow-x-auto relative">
+              <div className="absolute top-2 right-2 px-2 py-1 bg-clay-hairline rounded-clay-xs text-[10px] uppercase font-sans font-bold text-clay-muted">
+                HTML Code
+              </div>
+              <pre className="mt-2">
+{`<iframe
+  src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+  sandbox="allow-scripts"
+  allow="autoplay; fullscreen"
+  loading="lazy"
+  width="560"
+  height="315"
+  frameborder="0"
+></iframe>`}
+              </pre>
+            </div>
+          </div>
         </div>
       </div>
 

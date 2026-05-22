@@ -11,7 +11,7 @@ export function Header() {
       <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
         <div className="flex flex-col lg:flex-row items-center lg:space-x-4 space-y-4 lg:space-y-0 justify-center lg:justify-start">
           <div className="w-16 h-16 flex items-center justify-center overflow-hidden">
-            <img src="/logo.png" alt="Iframe Tester Logo" className="w-full h-full object-contain" />
+            <img src="/logo.webp" alt="Iframe Tester Logo" className="w-full h-full object-contain" />
           </div>
           <div>
             <h1 className="text-4xl sm:text-5xl font-clayDisplay font-medium tracking-[-0.04em] text-clay-ink">
@@ -48,7 +48,7 @@ export function Header() {
             <div className="w-2.5 h-2.5 rounded-full bg-clay-ochre/30"></div>
           </div>
           <img 
-            src="/mascot.png" 
+            src="/mascot.webp" 
             alt="3D Claymation Helper Mascot" 
             className="w-4/5 max-h-[85%] object-contain drop-shadow-md hover:scale-[1.03] transition-transform duration-300"
           />

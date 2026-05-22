@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./public/logo.png" alt="Iframe Tester Logo" width="100" />
+  <img src="./public/logo.webp" alt="Iframe Tester Logo" width="100" />
 </p>
 
 # Advanced Iframe Testing Application
@@ -361,6 +361,14 @@ https://your-app.com/?url=https://example.com&width=800&height=600&allowFullscre
 2. Check for typos in attribute names and values
 3. Verify the target application recognizes custom attributes
 4. Use the Debug Panel to verify attribute generation
+
+#### Enforcing HTTPS & HSTS on Static Hosting
+**Symptoms**: Security audit flags missing Strict-Transport-Security (HSTS) header on GitHub Pages.
+**Solutions**:
+1. Route your custom domain through a cloud proxy/CDN service like **Cloudflare**.
+2. Under the Cloudflare dashboard, navigate to **SSL/TLS** > **Edge Certificates**.
+3. Toggle on **Always Use HTTPS** to automatically redirect HTTP traffic.
+4. Toggle on **Strict Transport Security (HSTS)** and configure settings (max-age, include subdomains, preload) to enforce browser-level HTTPS.
 
 ### Debug Panel Features
 
