@@ -77,7 +77,7 @@ export const IframeGuide: React.FC = () => {
   ];
 
   return (
-    <div className="mt-16 space-y-16 border-t border-clay-hairline pt-16">
+    <div className="space-y-16">
       
       {/* Introduction and How-to Steps */}
       <div className="space-y-8">
@@ -126,15 +126,15 @@ export const IframeGuide: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           
           {/* Card 1: Ochre Card */}
-          <div className="bg-clay-ochre text-clay-ink rounded-clay-xl p-8 flex flex-col justify-between space-y-6 hover:scale-[1.01] transition-transform duration-200">
+          <div className="bg-clay-ochre-dark text-white rounded-clay-xl p-8 flex flex-col justify-between space-y-6 hover:scale-[1.01] transition-transform duration-200">
             <div className="space-y-4">
-              <div className="w-12 h-12 rounded-clay-md bg-clay-ink/10 flex items-center justify-center">
-                <Globe className="w-6 h-6 text-clay-ink" />
+              <div className="w-12 h-12 rounded-clay-md bg-white/10 flex items-center justify-center">
+                <Globe className="w-6 h-6 text-white" />
               </div>
-              <h3 className="text-xl font-clayDisplay font-semibold tracking-[-0.01em]">
+              <h3 className="text-xl font-clayDisplay font-semibold tracking-[-0.01em] text-white">
                 What is an Iframe Tester?
               </h3>
-              <p className="text-clay-ink/80 text-sm leading-relaxed font-clayBody">
+              <p className="text-white/80 text-sm leading-relaxed font-clayBody">
                 An iframe tester lets you preview how external websites display when embedded in an HTML iframe element. It is an essential utility for developers building integrations, portals, dashboards, widget loaders, or web applications that depend on embedded content.
               </p>
             </div>
@@ -144,15 +144,15 @@ export const IframeGuide: React.FC = () => {
           </div>
 
           {/* Card 2: Peach Card */}
-          <div className="bg-clay-peach text-clay-ink rounded-clay-xl p-8 flex flex-col justify-between space-y-6 hover:scale-[1.01] transition-transform duration-200">
+          <div className="bg-clay-peach-dark text-white rounded-clay-xl p-8 flex flex-col justify-between space-y-6 hover:scale-[1.01] transition-transform duration-200">
             <div className="space-y-4">
-              <div className="w-12 h-12 rounded-clay-md bg-clay-ink/10 flex items-center justify-center">
-                <Shield className="w-6 h-6 text-clay-ink" />
+              <div className="w-12 h-12 rounded-clay-md bg-white/10 flex items-center justify-center">
+                <Shield className="w-6 h-6 text-white" />
               </div>
-              <h3 className="text-xl font-clayDisplay font-semibold tracking-[-0.01em]">
+              <h3 className="text-xl font-clayDisplay font-semibold tracking-[-0.01em] text-white">
                 X-Frame-Options & CSP
               </h3>
-              <p className="text-clay-ink/80 text-sm leading-relaxed font-clayBody">
+              <p className="text-white/80 text-sm leading-relaxed font-clayBody">
                 HTTP headers are the most common cause of iframe failures. If a site responds with <code>X-Frame-Options: DENY</code> or a Content Security Policy (CSP) directive like <code>frame-ancestors 'self'</code>, the browser will refuse to load it to protect against clickjacking attacks.
               </p>
             </div>
@@ -162,15 +162,15 @@ export const IframeGuide: React.FC = () => {
           </div>
 
           {/* Card 3: Lavender Card */}
-          <div className="bg-clay-lavender text-clay-ink rounded-clay-xl p-8 flex flex-col justify-between space-y-6 hover:scale-[1.01] transition-transform duration-200">
+          <div className="bg-clay-lavender-dark text-white rounded-clay-xl p-8 flex flex-col justify-between space-y-6 hover:scale-[1.01] transition-transform duration-200">
             <div className="space-y-4">
-              <div className="w-12 h-12 rounded-clay-md bg-clay-ink/10 flex items-center justify-center">
-                <Lock className="w-6 h-6 text-clay-ink" />
+              <div className="w-12 h-12 rounded-clay-md bg-white/10 flex items-center justify-center">
+                <Lock className="w-6 h-6 text-white" />
               </div>
-              <h3 className="text-xl font-clayDisplay font-semibold tracking-[-0.01em]">
+              <h3 className="text-xl font-clayDisplay font-semibold tracking-[-0.01em] text-white">
                 The Sandbox Attribute
               </h3>
-              <p className="text-clay-ink/80 text-sm leading-relaxed font-clayBody">
+              <p className="text-white/80 text-sm leading-relaxed font-clayBody">
                 The <code>sandbox</code> HTML attribute enforces strict security restrictions on embedded webpages. It allows developers to prevent untrusted content from running malicious scripts, submitting unwanted forms, creating popup windows, or hijacking the parent page navigation.
               </p>
             </div>
@@ -185,11 +185,11 @@ export const IframeGuide: React.FC = () => {
               <div className="w-12 h-12 rounded-clay-md bg-white/10 flex items-center justify-center">
                 <AlertTriangle className="w-6 h-6 text-white" />
               </div>
-              <h3 className="text-xl font-clayDisplay font-semibold tracking-[-0.01em]">
+              <h3 className="text-xl font-clayDisplay font-semibold tracking-[-0.01em] text-white">
                 Troubleshooting Errors
               </h3>
               <p className="text-white/80 text-sm leading-relaxed font-clayBody">
-                When an iframe fails, check the browser's developer console (F12) for error logs. Look for CSP block notices, mixed content warnings (e.g. attempting to embed an insecure HTTP page into a secure HTTPS site), or frame-busting JavaScript issues.
+                When an iframe fails, check the browser's developer console (F12) for error logs. Use the context selector dropdown in the Console/Elements panel to switch scope to the iframe to run queries inside it, and check the Network tab's response headers for CSP/X-Frame-Options blocks.
               </p>
             </div>
             <div className="flex items-center space-x-2 text-xs font-semibold tracking-[0.5px] uppercase">
@@ -203,7 +203,7 @@ export const IframeGuide: React.FC = () => {
               <div className="w-12 h-12 rounded-clay-md bg-white/10 flex items-center justify-center">
                 <Code className="w-6 h-6 text-white" />
               </div>
-              <h3 className="text-xl font-clayDisplay font-semibold tracking-[-0.01em]">
+              <h3 className="text-xl font-clayDisplay font-semibold tracking-[-0.01em] text-white">
                 HTML Code Generator
               </h3>
               <p className="text-white/80 text-sm leading-relaxed font-clayBody">
@@ -225,7 +225,7 @@ export const IframeGuide: React.FC = () => {
                 SameSite Cookie Issues
               </h3>
               <p className="text-clay-body text-sm leading-relaxed font-clayBody">
-                To prevent cross-site tracking, modern browsers restrict third-party cookies inside iframes. If the embedded app requires user sessions, login state, or cookies, they must explicitly be sent with the <code>SameSite=None; Secure</code> headers to allow functionality.
+                To prevent cross-site tracking, modern browsers block third-party cookies inside iframes. If your login/session fails, open DevTools and inspect the **Application &gt; Cookies** tab for your domain, or check the **Issues** tab for warning notices about missing <code>SameSite=None; Secure</code> attributes.
               </p>
             </div>
             <div className="flex items-center space-x-2 text-xs font-semibold tracking-[0.5px] uppercase">

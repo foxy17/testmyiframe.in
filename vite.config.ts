@@ -15,6 +15,10 @@ export default defineConfig(({ command }) => ({
     sourcemap: false,
     // Optimize for GitHub Pages
     rollupOptions: {
+      input: {
+        main: 'index.html',
+        guide: 'guide.html',
+      },
       output: {
         manualChunks: undefined,
         // Ensure proper asset naming for GitHub Pages

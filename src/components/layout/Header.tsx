@@ -40,7 +40,7 @@ export function Header() {
       </div>
 
       {/* Right Column: 3D Mascot Illustration Card */}
-      <div className="lg:col-span-5">
+      <div className="hidden lg:block lg:col-span-5">
         <div className="bg-clay-surface-soft border border-clay-hairline rounded-clay-xl p-6 flex flex-col items-center justify-center text-center relative overflow-hidden shadow-sm aspect-[4/3] max-w-md mx-auto lg:max-w-none">
           <div className="absolute top-3 left-3 flex space-x-1.5">
             <div className="w-2.5 h-2.5 rounded-full bg-clay-pink/30"></div>

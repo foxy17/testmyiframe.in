@@ -56,7 +56,7 @@ export const DimensionControls: React.FC<DimensionControlsProps> = ({
             value={dimensions.width}
             onChange={(e) => handleDimensionChange('width', e.target.value)}
             className={`
-              flex-1 rounded-clay-md border px-3 py-2 text-sm transition-all duration-200 bg-white text-clay-ink h-11
+              flex-1 min-w-0 rounded-clay-md border px-3 py-2 text-sm transition-all duration-200 bg-white text-clay-ink h-11
               ${errors.width 
                 ? 'border-clay-error focus:border-clay-error bg-red-50' 
                 : 'border-clay-hairline focus:border-clay-primary'
@@ -69,7 +69,7 @@ export const DimensionControls: React.FC<DimensionControlsProps> = ({
           <select
             value={dimensions.widthUnit}
             onChange={(e) => handleDimensionChange('width', e.target.value as 'px' | '%')}
-            className="rounded-clay-md border border-clay-hairline bg-white px-3 py-2 text-sm text-clay-ink focus:border-clay-primary focus:outline-none focus:ring-0 h-11 transition-all cursor-pointer"
+            className="w-16 flex-shrink-0 rounded-clay-md border border-clay-hairline bg-white px-2 py-2 text-sm text-clay-ink focus:border-clay-primary focus:outline-none focus:ring-0 h-11 transition-all cursor-pointer"
           >
             <option value="px">px</option>
             <option value="%">%</option>
@@ -90,7 +90,7 @@ export const DimensionControls: React.FC<DimensionControlsProps> = ({
             value={dimensions.height}
             onChange={(e) => handleDimensionChange('height', e.target.value)}
             className={`
-              flex-1 rounded-clay-md border px-3 py-2 text-sm transition-all duration-200 bg-white text-clay-ink h-11
+              flex-1 min-w-0 rounded-clay-md border px-3 py-2 text-sm transition-all duration-200 bg-white text-clay-ink h-11
               ${errors.height 
                 ? 'border-clay-error focus:border-clay-error bg-red-50' 
                 : 'border-clay-hairline focus:border-clay-primary'
@@ -103,7 +103,7 @@ export const DimensionControls: React.FC<DimensionControlsProps> = ({
           <select
             value={dimensions.heightUnit}
             onChange={(e) => handleDimensionChange('height', e.target.value as 'px' | '%')}
-            className="rounded-clay-md border border-clay-hairline bg-white px-3 py-2 text-sm text-clay-ink focus:border-clay-primary focus:outline-none focus:ring-0 h-11 transition-all cursor-pointer"
+            className="w-16 flex-shrink-0 rounded-clay-md border border-clay-hairline bg-white px-2 py-2 text-sm text-clay-ink focus:border-clay-primary focus:outline-none focus:ring-0 h-11 transition-all cursor-pointer"
           >
             <option value="px">px</option>
             <option value="%">%</option>
